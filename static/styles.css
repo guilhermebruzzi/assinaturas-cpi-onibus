@@ -1,0 +1,157 @@
+html, body{
+    font-family: arial;
+    margin:0;
+    padding:0;
+}
+
+@font-face {
+    font-family: "Decker";
+    src: url("/static/fonts/Decker.eot");
+    font-weight:normal;
+    font-style:normal;
+}
+@font-face {
+    font-family:"Decker Bold";
+    src:url("/static/fonts/Decker-Bold.eot");
+    font-weight:normal;
+    font-style:normal;
+}
+@font-face {
+    font-family:"Code Light";
+    src:url("/static/fonts/Code-Light.otf");
+    font-weight:normal;
+    font-style:normal;
+}
+@font-face {
+    font-family:"Code Bold";
+    src:url("/static/fonts/Code-Bold.otf");
+    font-weight:normal;
+    font-style:normal;
+}
+
+.container {
+    background-color: #FFFFFF;
+    margin: 0 auto;
+    padding: 0;
+    position: relative;
+    width: 940px;
+}
+
+.content {
+    font-family: "Decker";
+    margin: 0 auto;
+    padding: 0;
+    width: 940px;
+}
+
+.btn-auth {
+    -moz-box-sizing: content-box;
+    border-radius: 2px 2px 2px 2px;
+    cursor: pointer;
+    display: inline-block;
+    margin: 0;
+    padding: 0 1em;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+fieldset{
+    margin: 10px auto;
+}
+
+input[type="text"]{
+    width: 200px;
+}
+.email, .name{
+    margin-left: 5px;
+}
+
+label{
+    font-size: 10px;
+}
+
+strong, .bold{
+    font-weight: bold;
+    font-family: "Decker Bold";
+}
+
+h2, h3{
+    margin: 15px auto;
+    color: #8C8C8C;
+    font-family: Decker;
+    text-transform: uppercase;
+    font-size: 10pt;
+    font-weight: normal;
+}
+
+h3{
+    font-size: 8pt;
+}
+
+h2 small{
+    font-size: 5pt;
+    position: relative;
+    top: -2px;
+}
+
+ul{
+    margin: 0px 0px;
+    padding: 0px 0px;
+}
+
+section{
+    margin: 5px auto;
+}
+
+section.container p{
+    margin-bottom: 10px;
+    line-height: 22px;
+}
+
+section.container p b{
+    font-weight: bold;
+}
+
+textarea {
+    resize: none;
+    width: 550px;
+    height: 220px;
+}
+
+iframe{
+    height: 900px;
+    left: -108px;
+    position: relative;
+    width: 1120px;
+}
+
+.hidden{
+    display: none !important;
+}
+
+footer {
+    text-align: center;
+    font-size: 11px;
+    line-height: 17px;
+    color: #9f0902;
+    height: 64px;
+    width: 960px;
+    border-top: 1px solid rgba(66, 66, 66, 0.3);
+    margin: 50px auto 30px;
+}
+
+footer a {
+    color: #9F0902;
+    text-decoration: underline;
+}
+
+footer a:hover {
+    font-weight: bold;
+}
+
+footer a.new_link{
+    font-weight: bold;
+    font-size: 16px;
+}

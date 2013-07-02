@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block css %}<link rel="stylesheet" href="/static/index.css" type="text/css" />{% endblock %}
+
+{% block content %}
+<section id="content" class="content">
+    <p><strong>Obrigado {{ current_user.name }}, por assinar essa petição!</strong></p>
+    <p>Essa petição foi assinada por {{ all_users|length }} pessoas:</p>
+    <p>
+        <div class="progressbar-container"><div id="progressbar"></div></div>
+        <script>
+            var progressbar_value = {{ all_users|length }};
+            $("#progressbar" ).progressbar({
+                value: progressbar_value
+            });
+        </script>
+    </p>
+    <p>
+        <h3>Últimas pessoas que assinaram:</h3>
+        {% for user in ultimos_5 %}
+            <div class="usuario-assinou">
+                <img class="assinou-foto" src="{{ user.photo }}">
+                <span class="assinou-name">{{ user.name }}</span>
+            </div>
+        {% endfor %}
+    </p>
+    <p>Apoie essa iniciativa compartilhando-a nas redes:</p>
+    <p>
+        <!-- AddThis Button BEGIN -->
+        <div class="addthis_toolbox addthis_default_style ">
+            <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+            <a class="addthis_button_tweet"></a>
+            <a class="addthis_counter addthis_pill_style"></a>
+        </div>
+        <script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+        <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-51d25d4315d8f2c4"></script>
+        <!-- AddThis Button END -->
+    </p>
+</section>
+{% endblock%}
+
+{% block js_bottom %}
+    <script type="text/javascript" src="/static/index.js"></script>
+{% endblock %}

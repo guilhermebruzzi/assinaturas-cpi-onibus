@@ -1,0 +1,161 @@
+/* Estilo da home */
+
+
+
+/* Estilo de assinou*/
+
+.progressbar-container{
+    width: 500px;
+    height: 50px;
+}
+
+.assinou-foto{
+    width: 50px;
+    height: 50px;
+}
+
+.assinou-nome{
+    position: relative;
+    top: -20px;
+}
+
+.addthis_toolbox {
+    margin: 5px auto;
+    width: 735px;
+}
+
+.addthis_button_tweet{
+    margin-left: 50px;
+}
+
+.addthis_counter{
+    margin-left: -80px;
+}
+
+/* Facebook Buttons */
+.uibutton {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #EEEEEE;
+    background-image: linear-gradient(#F5F6F6, #E4E4E3);
+    border-color: #999999 #999999 #888888;
+    border-image: none;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 #FFFFFF inset;
+    color: #333333;
+    cursor: pointer;
+    display: inline-block;
+    font: bold 11px 'lucida grande',tahoma,verdana,arial,sans-serif;
+    margin: 0;
+    overflow: visible;
+    padding: 0.3em 0.6em 0.375em;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+    z-index: 1;
+}
+.uibutton:hover, .uibutton:focus, .uibutton:active {
+    border-color: #777777 #777777 #666666;
+}
+.uibutton:active {
+    background: none repeat scroll 0 0 #DDDDDD;
+    border-color: #AAAAAA;
+    box-shadow: none;
+    filter: none;
+}
+.uibutton::-moz-focus-inner {
+    border: 0 none;
+    padding: 0;
+}
+.uibutton.icon:before {
+    background: url("/static/images/fb-icons.png") no-repeat scroll 99px 99px transparent;
+    content: "";
+    float: left;
+    height: 12px;
+    margin: 0 0.5em 0 0;
+    position: relative;
+    top: 1px;
+    width: 10px;
+}
+.uibutton.edit:before {
+    background-position: 0 0;
+}
+.uibutton.add:before {
+    background-position: -10px 0;
+}
+.uibutton.secure:before {
+    background-position: -20px 0;
+}
+.uibutton.prev:before {
+    background-position: -30px 0;
+}
+.uibutton.next:before {
+    background-position: -40px 0;
+    float: right;
+    margin: 0 -0.25em 0 0.5em;
+}
+.uibutton.large {
+    font-size: 13px;
+}
+.uibutton.confirm {
+    background-color: #5B74A8;
+    background-image: linear-gradient(#637BAD, #5872A7);
+    border-color: #29447E #29447E #1A356E;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 #8A9CC2 inset;
+    color: #FFFFFF;
+}
+.uibutton.confirm:active {
+    background: none repeat scroll 0 0 #4F6AA3;
+    border-color: #29447E;
+    box-shadow: none;
+    filter: none;
+}
+.uibutton.special {
+    background-color: #69A74E;
+    background-image: linear-gradient(#75AE5C, #67A54B);
+    border-color: #3B6E22 #3B6E22 #2C5115;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 #98C286 inset;
+    color: #FFFFFF;
+}
+.uibutton.special:active {
+    background: none repeat scroll 0 0 #609946;
+    border-color: #3B6E22;
+    box-shadow: none;
+    filter: none;
+}
+.uibutton-group {
+    display: inline-block;
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+}
+.uibutton + .uibutton, .uibutton + .uibutton-group, .uibutton-group + .uibutton, .uibutton-group + .uibutton-group {
+    margin-left: 3px;
+}
+.uibutton-group li {
+    float: left;
+    margin: 0;
+    padding: 0;
+}
+.uibutton-group .uibutton {
+    float: left;
+    margin-left: -1px;
+}
+.uibutton-group .uibutton:hover, .uibutton-group .uibutton:focus, .uibutton-group .uibutton:active {
+    z-index: 2;
+}
+.uibutton-group > .uibutton:first-child, .uibutton-group li:first-child .uibutton {
+    margin-left: 0;
+}
+.uibutton-toolbar {
+    background: none repeat scroll 0 0 #F2F2F2;
+    border-top: 1px solid #CCCCCC;
+    padding: 6px;
+}
+.uibutton-toolbar .uibutton, .uibutton-toolbar .uibutton-group {
+    vertical-align: bottom;
+}
