@@ -78,7 +78,7 @@ def assinar_com_fb(oauth_token):
     city = me_data['location']['name'] if 'location' in me_data and 'name' in me_data['location'] else None
     me_data['city'] = city.split(',')[0] if city and ',' in city else city
 
-    session['current_user'] = get_or_create_user(me_data, oauth_token=oauth_token)
+    session['current_user'] = get_or_create_user(me_data)
 
 def assinar_com_dados(dados):
     session['current_user'] = get_or_create_user(dados)
