@@ -20,13 +20,16 @@ def index():
     if request.method == 'POST':
         name = request.form["name"]
         email = request.form["email"]
-        assinar_com_dados(dados={"name": name, "email": email})
-        return redirect(url_for('assinou'))
+        if name and email:
+            assinar_com_dados(dados={"name": name, "email": email})
+            return redirect(url_for('assinou'))
+        else:
+            return redirect(url_for('index'))
 
     return render_template("index.html")
 
 
-@app.route('/assinou/', methods=['GET'])
+@app.route('/assinou/', methods=['GET', 'POST'])
 @need_to_be_logged
 def assinou():
     current_user = get_current_user()
