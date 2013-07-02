@@ -74,6 +74,7 @@ def assinar_com_fb(oauth_token):
         facebook_module = __import__("facebook")
 
     me_data = facebook_module.get_facebook_data(oauth_token)
+    me_data["facebook_id"] = me_data["id"]
 
     city = me_data['location']['name'] if 'location' in me_data and 'name' in me_data['location'] else None
     me_data['city'] = city.split(',')[0] if city and ',' in city else city
