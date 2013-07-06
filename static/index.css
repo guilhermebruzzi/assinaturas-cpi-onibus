@@ -44,11 +44,12 @@
     width: 450px;
 }
 
-.obrigatorio{
+.obrigatorio {
     font-size: 10px;
     color: #333333;
     text-align: right;
-    padding-right: 55px;
+    padding-right: 52px;
+    padding-top: 40px;
 }
 
 /* Estilo de assinou*/
