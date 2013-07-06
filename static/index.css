@@ -47,6 +47,8 @@
 .obrigatorio{
     font-size: 10px;
     color: #333333;
+    text-align: right;
+    padding-right: 55px;
 }
 
 /* Estilo de assinou*/
