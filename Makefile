@@ -23,3 +23,9 @@ kill_run:
 
 run: clean
 	@python ${root_dir}/app.py
+
+redis-server:
+	@redis-server redis.conf
+
+redis-cli:
+	@redis-cli

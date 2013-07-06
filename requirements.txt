@@ -1,3 +1,6 @@
 Flask==0.9
 Flask-OAuth==0.11
 https://github.com/sbook/flask-mongoengine/tarball/master
+Flask-Redis==0.0.3
+redis==2.7.6
+hiredis==0.1.1

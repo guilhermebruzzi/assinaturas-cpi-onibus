@@ -15,9 +15,11 @@ app = get_app() #  Explicitando uma variável app nesse arquivo para o Heroku ac
 def index():
     current_user = get_current_user()
     if current_user:
+#        current_user_in_redis = get_in_redis(current_user.user_id if current_user.user_id else current_user.facebook_id)
+#        print current_user_in_redis
         return redirect(url_for('assinou'))
 
-    if request.method == 'POST':
+    if request.method == 'POST' and "name" in request.form and "email" in request.form:
         name = request.form["name"]
         email = request.form["email"]
         if name and email:
@@ -38,14 +40,14 @@ def assinou():
 
     return render_template("assinou.html", current_user=current_user, all_users=all_users, ultimos_5=ultimos_5)
 
-@app.route('/login/')
+@app.route('/login/', methods=['GET', 'POST'])
 def login():
     facebook_url = url_for('facebook_authorized', _external=True)
     return facebook.authorize(
         callback=facebook_url
     )
 
-@app.route('/login/authorized/')
+@app.route('/login/authorized/', methods=['GET', 'POST'])
 @facebook.authorized_handler
 def facebook_authorized(resp):
     if resp is None:

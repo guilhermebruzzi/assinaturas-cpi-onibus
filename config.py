@@ -6,6 +6,7 @@ import sys
 from flask import Flask
 from flaskext.oauth import OAuth
 from flaskext.mongoengine import MongoEngine
+from flask_redis import Redis
 
 def add_path():
     global project_root
@@ -53,6 +54,8 @@ facebook = oauth.remote_app('facebook',
 )
 
 db = MongoEngine(app)
+
+#redis_store = Redis(app)
 
 def get_app():
     return app
