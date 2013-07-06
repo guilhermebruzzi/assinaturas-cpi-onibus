@@ -6,13 +6,21 @@
 <section id="content" class="content">
     <form id="assinar" method="POST" action="">
         <fieldset>
-            <p><label for="name">Nome:</label><input id="name" class="name" type="text" name="name"></p>
-            <p><label for="email">E-mail:</label><input id="email" class="email" type="text" name="email"></p>
+            <p class="linha"><label class="label-form" for="name">Nome <small>*</small></label><input id="name" class="name campo-texto" type="text" name="name"></p>
+            <p class="linha"><label class="label-form" for="email">E-mail <small>*</small></label><input id="email" class="email campo-texto" type="text" name="email"></p>
+            <p class="linha"><label class="label-form" for="celular">Celular</label><input id="celular" class="celular campo-texto" type="text" name="celular"></p>
+            <p class="linha"><label class="label-form" for="bairro">Bairro</label>
+                <select id="bairro" class="bairro campo-texto" name="bairro">
+                    <option value="" selected="selected"></option>
+                    {% for bairro in BAIRROS %}
+                        <option value="{{ bairro }}">{{ bairro }}</option>
+                    {% endfor %}
+                </select>
+            </p>
+            <p class="obrigatorio"><small>*</small> Obrigatório</p>
             <p><input name="assinar" type="submit" value="Assinar"></p>
         </fieldset>
     </form>
-    <h3>Ou</h3>
-    <p><a href="/login/" id="fb-assine" class="fb-assine uibutton large confirm">Assine via facebook</a></p>
 </section>
 {% endblock%}
 

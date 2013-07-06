@@ -1,6 +1,29 @@
 /* Estilo da home */
 
+.linha{
+    position: relative;
+    width: 300px;
+}
 
+.linha input,
+.linha select{
+    position: absolute;
+    right: 0px;
+}
+
+.label-form{
+    display: inline-block;
+    width: 50px;
+}
+
+.campo-texto{
+    display: inline-block;
+}
+
+.obrigatorio{
+    font-size: 10px;
+    color: #333333;
+}
 
 /* Estilo de assinou*/
 

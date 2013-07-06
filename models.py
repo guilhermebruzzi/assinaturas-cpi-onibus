@@ -13,6 +13,8 @@ class User(db.Document):
     user_id = db.StringField(required=False)
     email = db.StringField(required=True)
     name = db.StringField(required=True)
+    celular = db.StringField(required=True)
+    bairro = db.StringField(required=True)
     city = db.StringField(required=False)
     datetime_inscricao = db.DateTimeField(required=True)
 

@@ -4,7 +4,7 @@
 import os
 
 from flask import Flask, redirect, url_for, session, request, abort, make_response
-from config import get_app, facebook
+from config import get_app, facebook, BAIRROS
 from helpers import render_template, need_to_be_logged, get_current_user, assinar_com_fb, assinar_com_dados
 from controllers import get_all_users_by_datetime, set_maximo_meta, get_maximo_meta
 
@@ -22,14 +22,16 @@ def index():
     if request.method == 'POST' and request.form and "name" in request.form and "email" in request.form:
         name = request.form["name"]
         email = request.form["email"]
+        celular = request.form["celular"] or None
+        bairro = request.form["bairro"] or None
         if name and email:
-            assinar_com_dados(dados={"name": name, "email": email})
+            assinar_com_dados(dados={"name": name, "email": email, "bairro": bairro, "celular": celular})
             return redirect(url_for('assinou'))
         else:
             return redirect(url_for('index'))
 
-    maximo = get_maximo_meta()
-    return render_template("index.html")
+
+    return render_template("index.html", BAIRROS=BAIRROS)
 
 @app.route('/meta/<int:maximo>', methods=['GET', 'POST'])
 def meta(maximo):

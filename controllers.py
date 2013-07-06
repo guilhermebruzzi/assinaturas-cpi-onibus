@@ -26,7 +26,7 @@ def get_or_create_user(data):
             user = User.objects.get(user_id=user_id)
 #            user_from_redis = get_in_redis(user_id)
         except DoesNotExist:
-            user = User.objects.create(user_id=user_id, email=data['email'], name=data['name'], datetime_inscricao=datetime_inscricao, city=city)
+            user = User.objects.create(user_id=user_id, email=data['email'], name=data['name'], celular=data['celular'], bairro=data['bairro'], datetime_inscricao=datetime_inscricao, city=city)
 #            user_from_redis = create_in_redis(user_id=user_id, email=data['email'], name=data['name'], datetime_inscricao=datetime_inscricao, city=city)
     elif facebook_id:
         try:
@@ -36,7 +36,7 @@ def get_or_create_user(data):
 #            user_from_redis = create_in_redis(facebook_id=facebook_id, email=data['email'], name=data['name'], datetime_inscricao=datetime_inscricao, city=city)
     else:
         user_id = str(uuid.uuid4())
-        user = User.objects.create(user_id=user_id, email=data['email'], name=data['name'], datetime_inscricao=datetime_inscricao, city=city)
+        user = User.objects.create(user_id=user_id, email=data['email'], name=data['name'], celular=data['celular'], bairro=data['bairro'], datetime_inscricao=datetime_inscricao, city=city)
 #        user_from_redis = create_in_redis(user_id=user_id, email=data['email'], name=data['name'], datetime_inscricao=datetime_inscricao, city=city)
 
     return user

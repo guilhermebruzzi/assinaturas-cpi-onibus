@@ -30,18 +30,18 @@ html, body{
 }
 
 .container {
-    background-color: #FFFFFF;
+    background: none repeat scroll 0 0 transparent;
     margin: 0 auto;
     padding: 0;
     position: relative;
-    width: 940px;
+    width: 370px;
 }
 
 .content {
     font-family: "Decker";
     margin: 0 auto;
     padding: 0;
-    width: 940px;
+    width: 370px;
 }
 
 .btn-auth {
@@ -68,8 +68,8 @@ input[type="text"]{
     margin-left: 5px;
 }
 
-label{
-    font-size: 10px;
+label, small{
+    font-size: 14px;
 }
 
 strong, .bold{

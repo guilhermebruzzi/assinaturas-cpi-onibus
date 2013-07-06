@@ -57,5 +57,17 @@ db = MongoEngine(app)
 
 #redis_store = Redis(app)
 
+BAIRROS = [
+    u"Bairro Imperial de São Cristóvão", u"Benfica", u"Caju", u"Catumbi", u"Centro", u"Cidade Nova", u"Estácio", u"Gamboa", u"Glória", "Lapa", "Mangueira", u"Paquetá", "Rio Comprido", "Santa Teresa", "Santo Cristo", u"Saúde", "Vasco da Gama",
+    "Botafogo", "Catete", "Copacabana", "Cosme Velho", "Flamengo", u"Gávea", u"Humaitá", "Ipanema", u"Jardim Botânico", "Lagoa", "Laranjeiras", "Leblon", "Leme", "Rocinha", u"São Conrado", "Urca", "Vidigal",
+    "Anil", "Barra da Tijuca", "Barra de Guaratiba", "Camorim", "Cidade de Deus", "Curicica", u"Freguesia de Jacarepaguá", u"Gardênia Azul", "Grumari", u"Itanhangá", u"Jacarepaguá", u"Joá", u"Praça Seca", "Pechincha", "Recreio dos Bandeirantes", "Tanque", "Taquara", "Vargem Grande", "Vargem Pequena", "Vila Valqueire",
+    "Bangu", "Campo Grande", "Cosmos", "Deodoro", "Ecoville", "Guaratiba", u"Inhoaíba", "Jardim Sulacap", u"Magalhães Bastos", "Paciencia", "Padre Miguel", "Pedra de Guaratiba", "Realengo", "Santa Cruz", u"Santíssimo", u"Senador Camará", "Senador Vasconcelos", "Sepetiba", "Vila Militar",
+    "Alto da Boa Vista", u"Andaraí", u"Grajaú", u"Maracanã", u"Praça da Bandeira", "Tijuca", "Vila Isabel",
+    u"Bancários", "Cacuia", u"Cidade Universitária", u"Cocotá", "Freguesia", u"Galeão", "Jardim Carioca", "Jardim Guanabara", u"Moneró", "Pitangueiras", "Portuguesa", "Praia da Bandeira", "Ribeira", u"Tauá", "Zumbi",
+    u"Abolição", u"Agua Santa", "Acari", "Anchieta", "Barros Filho", "Bento Ribeiro", "Bonsucesso", u"Brás de Pina", "Cachambi", "Cavalcante", "Campinho", "Cascadura", "Coelho Neto", u"Colégio", u"Complexo do Alemão", "Cordovil", "Costa Barros", "Del Castilho", "Encantado", "Engenheiro Leal", "Engenho da Rainha", "Engenho de Dentro", "Engenho Novo", "Guadalupe", u"Higienópolis", u"Honório Gurgel", u"Irajá", u"Inhaúma", u"Jacaré", "Jacarezinho", u"Jardim América", "Lins de Vasconcelos", "Madureira", "Manguinhos", u"Maré", "Marechal Hermes", u"Maria da Graça", u"Méier", "Olaria", "Oswaldo Cruz", "Parada de Lucas", "Parque Anchieta", u"Parque Colúmbia", "Pavuna", "Penha", "Penha Circular", "Piedade", "Pilares", "Quintino Bocaiuva", "Ramos", "Riachuelo", "Ricardo de Albuquerque", "Rocha", "Rocha Miranda", "Sampaio", u"São Francisco Xavier", u"Tomás Coelho", u"Turiaçu", "Vaz Lobo", "Vicente de Carvalho", u"Vigário Geral", "Vila da Penha", "Vila Kosmos", "Vista Alegre"
+]
+
+BAIRROS = sorted(BAIRROS)
+
 def get_app():
     return app
