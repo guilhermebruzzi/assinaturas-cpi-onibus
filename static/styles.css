@@ -114,9 +114,13 @@ label, small{
     font-size: 14px;
 }
 
-strong, .bold{
+strong, .bold {
     font-weight: bold;
-    font-family: "Decker Bold";
+    font-family: Decker;
+    font-size: 18px;
+    display: block;
+    width: 240px;
+    margin: 0 auto 20px auto;
 }
 
 h2, h3{
