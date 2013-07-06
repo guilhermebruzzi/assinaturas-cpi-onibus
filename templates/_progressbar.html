@@ -1,0 +1,11 @@
+{% macro gera_progressbar(all_users, maximo) -%}
+<div class="progressbar-container"><div id="progressbar"></div></div>
+<script>
+    var progressbar_value = {{ all_users|length }};
+    var max_value = {{ maximo }};
+    $("#progressbar" ).progressbar({
+        value: progressbar_value,
+        max: max_value
+    });
+</script>
+{%- endmacro %}

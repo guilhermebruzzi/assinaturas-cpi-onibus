@@ -28,3 +28,6 @@ class User(db.Document):
 
     def __unicode__(self):
         return self.name
+
+class Meta(db.Document):
+    maximo = db.IntField(required=True)

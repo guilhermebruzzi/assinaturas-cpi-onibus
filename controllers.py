@@ -2,7 +2,7 @@
 
 from datetime import datetime
 from mongoengine.queryset import DoesNotExist
-from models import User
+from models import User, Meta
 import uuid
 #from config import redis_store
 import json
@@ -46,3 +46,20 @@ def get_all_users_by_datetime():
 
 def get_all_users_by_name():
     return User.objects.order_by('-name')
+
+def get_meta():
+    meta = Meta.objects.first()
+    if not meta:
+        meta = Meta()
+        meta.maximo = 12000
+        meta.save()
+    return meta
+
+def get_maximo_meta():
+    meta = get_meta()
+    return meta.maximo
+
+def set_maximo_meta(maximo):
+    meta = get_meta()
+    meta.maximo = maximo
+    meta.save()

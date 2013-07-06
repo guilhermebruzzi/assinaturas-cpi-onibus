@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% import '_progressbar.html' as progressbar %}
 
 {% block css %}<link rel="stylesheet" href="/static/index.css" type="text/css" />{% endblock %}
 
@@ -7,13 +8,7 @@
     <p><strong>Obrigado {{ current_user.name }}, por assinar essa petição!</strong></p>
     <p>Essa petição foi assinada por {{ all_users|length }} pessoas:</p>
     <p>
-        <div class="progressbar-container"><div id="progressbar"></div></div>
-        <script>
-            var progressbar_value = {{ all_users|length }};
-            $("#progressbar" ).progressbar({
-                value: progressbar_value
-            });
-        </script>
+        {{ progressbar.gera_progressbar(all_users, maximo) }}
     </p>
     <p>
         <h3>Últimas pessoas que assinaram:</h3>

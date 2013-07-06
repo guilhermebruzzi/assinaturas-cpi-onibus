@@ -6,7 +6,7 @@ import os
 from flask import Flask, redirect, url_for, session, request, abort, make_response
 from config import get_app, facebook
 from helpers import render_template, need_to_be_logged, get_current_user, assinar_com_fb, assinar_com_dados
-from controllers import get_all_users_by_datetime
+from controllers import get_all_users_by_datetime, set_maximo_meta, get_maximo_meta
 
 
 app = get_app() #  Explicitando uma variável app nesse arquivo para o Heroku achar
@@ -19,7 +19,7 @@ def index():
 #        print current_user_in_redis
         return redirect(url_for('assinou'))
 
-    if request.method == 'POST' and "name" in request.form and "email" in request.form:
+    if request.method == 'POST' and request.form and "name" in request.form and "email" in request.form:
         name = request.form["name"]
         email = request.form["email"]
         if name and email:
@@ -28,8 +28,19 @@ def index():
         else:
             return redirect(url_for('index'))
 
+    maximo = get_maximo_meta()
     return render_template("index.html")
 
+@app.route('/meta/<int:maximo>', methods=['GET', 'POST'])
+def meta(maximo):
+    current_user = get_current_user()
+    all_users = get_all_users_by_datetime()
+    if (current_user.name.startswith("Bernardo") and current_user.name.endswith("Ainbinder")) or\
+        (current_user.name.startswith("Guilherme") and current_user.name.endswith("Bruzzi")):
+        set_maximo_meta(maximo)
+    else:
+        maximo = get_maximo_meta()
+    return render_template("meta.html", current_user=current_user, all_users=all_users, maximo=maximo)
 
 @app.route('/assinou/', methods=['GET', 'POST'])
 @need_to_be_logged
@@ -37,8 +48,9 @@ def assinou():
     current_user = get_current_user()
     all_users = get_all_users_by_datetime()
     ultimos_5 = all_users[:5]
+    maximo = get_maximo_meta()
 
-    return render_template("assinou.html", current_user=current_user, all_users=all_users, ultimos_5=ultimos_5)
+    return render_template("assinou.html", current_user=current_user, all_users=all_users, maximo=maximo, ultimos_5=ultimos_5)
 
 @app.route('/login/', methods=['GET', 'POST'])
 def login():

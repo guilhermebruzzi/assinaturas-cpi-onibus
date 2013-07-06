@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% import '_progressbar.html' as progressbar %}
+
+{% block css %}<link rel="stylesheet" href="/static/index.css" type="text/css" />{% endblock %}
+
+{% block content %}
+<section id="content" class="content">
+    <p>Meta atual: {{ maximo }}</p>
+    <p>
+        {{ progressbar.gera_progressbar(all_users, maximo) }}
+    </p>
+</section>
+{% endblock%}
