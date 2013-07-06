@@ -5,29 +5,33 @@
 
 {% block content %}
 <section id="content" class="content">
-    <p><strong>Obrigado {{ current_user.name }}, por assinar essa petição!</strong></p>
-    <p>Essa petição foi assinada por {{ all_users|length }} pessoas:</p>
+    <p><strong>Obrigado por se inscrever!</strong></p>
+    <p>Já somos {{ all_users|length }} pessoas ligadas na CPI dos ônibus no Rio:</p>
     <p>
         {{ progressbar.gera_progressbar(all_users, maximo) }}
     </p>
-    <p>
-        <h3>Últimas pessoas que assinaram:</h3>
-        {% for user in ultimos_5 %}
-            <div class="usuario-assinou">
-                <img class="assinou-foto" src="{{ user.photo }}">
-                <span class="assinou-name">{{ user.name }}</span>
-            </div>
-        {% endfor %}
-    </p>
-    <p>Apoie essa iniciativa compartilhando-a nas redes:</p>
+    <p>Agora ajude a espalhar:</p>
     <p>
         <!-- AddThis Button BEGIN -->
+        <script type="text/javascript">
+            var addthis_share = addthis_share || {};
+            addthis_share = {
+                passthrough : {
+                    twitter: {
+                        text: "Acabei de me inscrever para ficar #LigadoNaCPI \nClique para se inscrever: http://www.strikingly.com/cpidosonibus"
+                    }
+                }
+            };
+
+        </script>
         <div class="addthis_toolbox addthis_default_style ">
             <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
             <a class="addthis_button_tweet"></a>
-            <a class="addthis_counter addthis_pill_style"></a>
         </div>
-        <script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+        <script type="text/javascript">
+            var addthis_config = {"data_track_addressbar":true};
+
+        </script>
         <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-51d25d4315d8f2c4"></script>
         <!-- AddThis Button END -->
     </p>

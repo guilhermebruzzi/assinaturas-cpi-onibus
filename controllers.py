@@ -14,30 +14,23 @@ def create_in_redis(**data):
 def get_in_redis(user_id):
     return json.loads(redis_store.get(user_id))
 
+def get_by_email(email):
+    return User.objects.get(email=email)
+
 def get_or_create_user(data):
-    user_id = data['user_id'] if 'user_id' in data else None
+    user_id = data['user_id'] if 'user_id' in data else str(uuid.uuid4())
     facebook_id = data['facebook_id'] if 'facebook_id' in data else None
+    email = data['email'] if 'email' in data else None
     datetime_inscricao = datetime.now()
     city = None
+
     if "city" in data and data['city']:
         city = data['city']
-    if user_id:
-        try:
-            user = User.objects.get(user_id=user_id)
-#            user_from_redis = get_in_redis(user_id)
-        except DoesNotExist:
-            user = User.objects.create(user_id=user_id, email=data['email'], name=data['name'], celular=data['celular'], bairro=data['bairro'], datetime_inscricao=datetime_inscricao, city=city)
-#            user_from_redis = create_in_redis(user_id=user_id, email=data['email'], name=data['name'], datetime_inscricao=datetime_inscricao, city=city)
-    elif facebook_id:
-        try:
-            user = User.objects.get(facebook_id=facebook_id)
-        except DoesNotExist:
-            user = User.objects.create(facebook_id=facebook_id, email=data['email'], name=data['name'], datetime_inscricao=datetime_inscricao, city=city)
-#            user_from_redis = create_in_redis(facebook_id=facebook_id, email=data['email'], name=data['name'], datetime_inscricao=datetime_inscricao, city=city)
-    else:
-        user_id = str(uuid.uuid4())
+
+    try:
+        user = User.objects.get(email=email)
+    except DoesNotExist:
         user = User.objects.create(user_id=user_id, email=data['email'], name=data['name'], celular=data['celular'], bairro=data['bairro'], datetime_inscricao=datetime_inscricao, city=city)
-#        user_from_redis = create_in_redis(user_id=user_id, email=data['email'], name=data['name'], datetime_inscricao=datetime_inscricao, city=city)
 
     return user
 
@@ -51,7 +44,7 @@ def get_meta():
     meta = Meta.objects.first()
     if not meta:
         meta = Meta()
-        meta.maximo = 12000
+        meta.maximo = 1000
         meta.save()
     return meta
 

@@ -6,7 +6,10 @@
 <section id="content" class="content">
     <form id="assinar" method="POST" action="">
         <fieldset>
-            <p class="linha"><label class="label-form" for="name">Nome <small>*</small></label><input id="name" class="name campo-texto" type="text" name="name"></p>
+            {% if msg %}
+                <p class="mensagem">{{ msg }}</p>
+            {% endif %}
+            <p class="linha"><label class="label-form" for="name">Nome completo <small>*</small></label><input id="name" class="name campo-texto" type="text" name="name"></p>
             <p class="linha"><label class="label-form" for="email">E-mail <small>*</small></label><input id="email" class="email campo-texto" type="text" name="email"></p>
             <p class="linha"><label class="label-form" for="celular">Celular</label><input id="celular" class="celular campo-texto" type="text" name="celular"></p>
             <p class="linha"><label class="label-form" for="bairro">Bairro</label>
@@ -18,7 +21,7 @@
                 </select>
             </p>
             <p class="obrigatorio"><small>*</small> Obrigatório</p>
-            <p><input name="assinar" type="submit" value="Assinar"></p>
+            <p class="assinar-linha"><input name="assinar" class="button orange" type="submit" value="Inscreva-se"></p>
         </fieldset>
     </form>
 </section>

@@ -2,7 +2,22 @@
 
 .linha{
     position: relative;
-    width: 300px;
+    width: 400px;
+}
+
+.assinar-linha,
+.obrigatorio{
+    padding-left: 27px;
+}
+
+.assinar-linha{
+    width: 423px;
+    position: relative;
+}
+
+.assinar-linha .orange{
+    position: absolute;
+    right: 47px;
 }
 
 .linha input,
@@ -13,11 +28,20 @@
 
 .label-form{
     display: inline-block;
-    width: 50px;
+    width: 140px;
+    text-align: right;
 }
 
 .campo-texto{
     display: inline-block;
+}
+
+.mensagem{
+    display: inline-block;
+    font-size: 14px;
+    color: #333333;
+    text-align: center;
+    width: 450px;
 }
 
 .obrigatorio{
@@ -44,7 +68,7 @@
 
 .addthis_toolbox {
     margin: 5px auto;
-    width: 735px;
+    padding-left: 105px;
 }
 
 .addthis_button_tweet{

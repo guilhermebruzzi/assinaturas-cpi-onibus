@@ -19,6 +19,10 @@ def index():
 #        print current_user_in_redis
         return redirect(url_for('assinou'))
 
+    msg = session['msg'] if 'msg' in session else None
+    if msg:
+        del session['msg']
+
     if request.method == 'POST' and request.form and "name" in request.form and "email" in request.form:
         name = request.form["name"]
         email = request.form["email"]
@@ -28,10 +32,10 @@ def index():
             assinar_com_dados(dados={"name": name, "email": email, "bairro": bairro, "celular": celular})
             return redirect(url_for('assinou'))
         else:
+            session['msg'] = u'Os campos "nome" e "email" são obrigatórios.'
             return redirect(url_for('index'))
 
-
-    return render_template("index.html", BAIRROS=BAIRROS)
+    return render_template("index.html", BAIRROS=BAIRROS, msg=msg)
 
 def __make_response_plain_text__(response_text, type_of_response="text/plain"):
     response = make_response(response_text)
