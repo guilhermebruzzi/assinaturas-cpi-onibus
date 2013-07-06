@@ -33,6 +33,20 @@ def index():
 
     return render_template("index.html", BAIRROS=BAIRROS)
 
+def __make_response_plain_text__(response_text, type_of_response="text/plain"):
+    response = make_response(response_text)
+    response.headers["Content-type"] = type_of_response
+    return response
+
+@app.route('/lista-assinaturas.csv', methods=['GET'])
+def lista_inscritos():
+    csv_lista_assinantes = "nome, email, celular, bairro, datetime_inscricao\n"
+    all_users = get_all_users_by_datetime()
+    for user in all_users:
+        csv_lista_assinantes += "%s, %s, %s, %s, %s\n" % (user.name, user.email, user.celular, user.bairro, str(user.datetime_inscricao))
+    return __make_response_plain_text__(csv_lista_assinantes)
+
+
 @app.route('/meta/<int:maximo>', methods=['GET', 'POST'])
 def meta(maximo):
     current_user = get_current_user()
