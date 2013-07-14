@@ -38,7 +38,7 @@ html, body{
 }
 
 .content {
-    font-family: "Decker";
+    font-family: Helvetica, Decker;
     margin: 0 auto;
     padding: 0;
     width: 450px;
@@ -116,7 +116,7 @@ label, small{
 
 strong, .bold {
     font-weight: bold;
-    font-family: Decker;
+    font-family: Helvetica, Decker;
     font-size: 18px;
     display: block;
     width: 240px;
@@ -126,7 +126,7 @@ strong, .bold {
 h2, h3{
     margin: 15px auto;
     color: #8C8C8C;
-    font-family: Decker;
+    font-family: Helvetica, Decker;
     text-transform: uppercase;
     font-size: 10pt;
     font-weight: normal;
