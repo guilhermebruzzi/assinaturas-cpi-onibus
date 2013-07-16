@@ -11,12 +11,12 @@ controllers_module = None
 class User(db.Document):
     facebook_id = db.StringField(required=False)
     user_id = db.StringField(required=False)
-    email = db.StringField(required=True)
+    email = db.EmailField(required=True)
     name = db.StringField(required=True)
-    celular = db.StringField(required=True)
-    bairro = db.StringField(required=True)
+    celular = db.StringField(required=False)
+    bairro = db.StringField(required=False)
     city = db.StringField(required=False)
-    datetime_inscricao = db.DateTimeField(required=True)
+    datetime_inscricao = db.DateTimeField(required=False)
 
     @property
     def photo(self):

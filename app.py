@@ -4,10 +4,11 @@
 import os
 
 from flask import Flask, redirect, url_for, session, request, abort, make_response
+
 from config import get_app, facebook, BAIRROS
 from helpers import render_template, need_to_be_logged, get_current_user, assinar_com_fb, assinar_com_dados
 from controllers import get_all_users_by_datetime, set_maximo_meta, get_maximo_meta
-
+from forms import UserCaptchaForm
 
 app = get_app() #  Explicitando uma variável app nesse arquivo para o Heroku achar
 
@@ -23,19 +24,29 @@ def index():
     if msg:
         del session['msg']
 
+    form = UserCaptchaForm(request.form)
+
     if request.method == 'POST' and request.form and "name" in request.form and "email" in request.form:
         name = request.form["name"]
         email = request.form["email"]
         celular = request.form["celular"] or None
         bairro = request.form["bairro"] or None
-        if name and email:
+        if form.validate():
             assinar_com_dados(dados={"name": name, "email": email, "bairro": bairro, "celular": celular})
             return redirect(url_for('assinou'))
         else:
-            session['msg'] = u'Os campos "nome" e "email" são obrigatórios.'
+            if not name or not email:
+                session['msg'] = u'Os campos "nome" e "email" são obrigatórios.'
+            elif len(form.captcha.errors) > 0:
+                session['msg'] = u'Preencha corretamente o campo "texto da imagem".'
+            elif email and len(form.email.errors) > 0:
+                session['msg'] = u'Preencha um email válido.'
+            else:
+                session['msg'] = u'Preencha corretamente os campos abaixo.'
+
             return redirect(url_for('index'))
 
-    return render_template("index.html", BAIRROS=BAIRROS, msg=msg)
+    return render_template("index.html", BAIRROS=BAIRROS, msg=msg, form=form)
 
 def __make_response_plain_text__(response_text, type_of_response="text/plain"):
     response = make_response(response_text)
