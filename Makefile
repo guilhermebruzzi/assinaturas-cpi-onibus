@@ -24,6 +24,11 @@ kill_run:
 run: clean
 	@python ${root_dir}/app.py
 
+tests: clean
+	@touch ${root_dir}/tests/coverage.xml ${root_dir}/nosetests.xml ${root_dir}/.coverage
+	@rm ${root_dir}/tests/coverage.xml ${root_dir}/nosetests.xml ${root_dir}/.coverage
+	@python ${root_dir}/tests/run.py
+
 redis-server:
 	@redis-server redis.conf
 

@@ -5,15 +5,21 @@ import os
 
 from flask import Flask, redirect, url_for, session, request, abort, make_response
 
-from config import get_app, facebook, BAIRROS
+from config import get_app, facebook, BAIRROS, cache
 from helpers import render_template, need_to_be_logged, get_current_user, assinar_com_fb, assinar_com_dados
 from controllers import get_all_users_by_datetime, set_maximo_meta, get_maximo_meta
 from forms import UserCaptchaForm
 
 app = get_app() #  Explicitando uma variável app nesse arquivo para o Heroku achar
+form_default = UserCaptchaForm()
+
+@cache.cached(timeout=18000)
+def pagina_principal():
+    return render_template("index.html", BAIRROS=BAIRROS, msg=None, form=form_default)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+
     current_user = get_current_user()
     if current_user:
 #        current_user_in_redis = get_in_redis(current_user.user_id if current_user.user_id else current_user.facebook_id)
@@ -21,16 +27,21 @@ def index():
         return redirect(url_for('assinou'))
 
     msg = session['msg'] if 'msg' in session else None
+
+    if request.method == 'GET' and not msg:
+        return pagina_principal()
+
     if msg:
         del session['msg']
 
     form = UserCaptchaForm(request.form)
 
-    if request.method == 'POST' and request.form and "name" in request.form and "email" in request.form:
-        name = request.form["name"]
-        email = request.form["email"]
-        celular = request.form["celular"] or None
-        bairro = request.form["bairro"] or None
+    if request.method == 'POST':
+#        import ipdb; ipdb.set_trace()
+        name = request.form.get("name")
+        email = request.form.get("email")
+        celular = request.form.get("celular")
+        bairro = request.form.get("bairro")
         if form.validate():
             assinar_com_dados(dados={"name": name, "email": email, "bairro": bairro, "celular": celular})
             return redirect(url_for('assinou'))

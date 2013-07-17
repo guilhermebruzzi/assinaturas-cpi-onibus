@@ -2,3 +2,5 @@ coverage==3.5.3
 nose==1.2.1
 nosexcover==1.0.7
 ipdb==0.7
+Flask-Testing==0.4
+blinker==1.3
