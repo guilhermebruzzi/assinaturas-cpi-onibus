@@ -7,3 +7,5 @@ redis==2.7.6
 hiredis==0.1.1
 recaptcha-client==1.0.6
 wtforms-recaptcha==0.2.0
+newrelic==1.13.1.31
+gunicorn==17.5
