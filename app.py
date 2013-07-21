@@ -7,37 +7,51 @@ from flask import Flask, redirect, url_for, session, request, abort, make_respon
 
 from config import get_app, facebook, BAIRROS, cache
 from helpers import render_template, need_to_be_logged, get_current_user, assinar_com_fb, assinar_com_dados
-from controllers import get_all_users_by_datetime, set_maximo_meta, get_maximo_meta
-from forms import UserCaptchaForm
+from controllers import get_all_users_by_datetime, set_maximo_meta, get_maximo_meta, get_redis_count, incr_redis_count
+from forms import UserCaptchaForm, UserForm
 
 app = get_app() #  Explicitando uma variável app nesse arquivo para o Heroku achar
-form_default = UserCaptchaForm()
+user_form_default = UserForm()
+user_captcha_form_default = UserCaptchaForm()
+
 
 @cache.cached(timeout=18000)
 def pagina_principal():
-    return render_template("index.html", BAIRROS=BAIRROS, msg=None, form=form_default)
+    return render_template("index.html", BAIRROS=BAIRROS, msg=None, form=user_form_default)
+
+def get_form():
+    count = get_redis_count(request)
+
+    if count:
+        count = int(count)
+    else:
+        count = 0
+
+    if request.method == 'POST':
+        form = UserForm(request.form) if count <= 2 else UserCaptchaForm(request.form)
+    else:
+        form = user_form_default if count <= 2 else user_captcha_form_default
+
+    return form
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-
     current_user = get_current_user()
     if current_user:
-#        current_user_in_redis = get_in_redis(current_user.user_id if current_user.user_id else current_user.facebook_id)
-#        print current_user_in_redis
         return redirect(url_for('assinou'))
 
     msg = session['msg'] if 'msg' in session else None
 
-    if request.method == 'GET' and not msg:
+    form = get_form()
+
+    if request.method == 'GET' and not msg and not isinstance(form, UserCaptchaForm):
         return pagina_principal()
 
     if msg:
         del session['msg']
 
-    form = UserCaptchaForm(request.form)
-
     if request.method == 'POST':
-#        import ipdb; ipdb.set_trace()
+        incr_redis_count(request)
         name = request.form.get("name")
         email = request.form.get("email")
         celular = request.form.get("celular")
@@ -48,7 +62,7 @@ def index():
         else:
             if not name or not email:
                 session['msg'] = u'Os campos "nome" e "email" são obrigatórios.'
-            elif len(form.captcha.errors) > 0:
+            elif hasattr(form, "captcha") and len(form.captcha.errors) > 0:
                 session['msg'] = u'Preencha corretamente o campo "texto da imagem".'
             elif email and len(form.email.errors) > 0:
                 session['msg'] = u'Preencha um email válido.'

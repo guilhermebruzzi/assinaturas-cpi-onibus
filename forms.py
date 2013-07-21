@@ -7,3 +7,4 @@ UserForm = model_form(User)
 
 class UserCaptchaForm(UserForm):
     captcha = RecaptchaField()
+

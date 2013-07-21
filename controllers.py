@@ -4,7 +4,7 @@ from datetime import datetime
 from mongoengine.queryset import DoesNotExist
 from models import User, Meta
 import uuid
-#from config import redis_store
+from config import redis_store
 import json
 
 def create_in_redis(**data):
@@ -13,6 +13,12 @@ def create_in_redis(**data):
 
 def get_in_redis(user_id):
     return json.loads(redis_store.get(user_id))
+
+def incr_redis_count(request):
+    return redis_store.incr(request.remote_addr)
+
+def get_redis_count(request):
+    return redis_store.get(request.remote_addr)
 
 def get_by_email(email):
     return User.objects.get(email=email)

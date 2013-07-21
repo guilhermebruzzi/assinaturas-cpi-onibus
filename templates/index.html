@@ -20,7 +20,9 @@
                     {% endfor %}
                 </select>
             </p>
-            <p class="linha">{{ form.captcha }}</p>
+            {% if form.captcha %}
+                <p class="linha">{{ form.captcha }}</p>
+            {% endif %}
             <p class="assinar-linha"><input name="assinar" class="button orange" type="submit" value="Inscreva-se"></p>
             <p class="obrigatorio"><small>*</small> Obrigatório</p>
         </fieldset>

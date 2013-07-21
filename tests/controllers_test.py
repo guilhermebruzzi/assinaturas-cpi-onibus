@@ -9,6 +9,7 @@ from base_test import BaseTest
 
 from models import User
 from controllers import get_or_create_user
+from config import redis_store
 
 class ControllersTest(BaseTest):
 
@@ -53,7 +54,7 @@ class ControllersTest(BaseTest):
 
 
     def get_main_page_test(self):
-        response = self.client.get("/")
+        response = self._get_with_client("/")
         self.assert_template_used("index.html")
         self.assert200(response)
         self._assert_nome_completo_in_page(response)
@@ -62,13 +63,13 @@ class ControllersTest(BaseTest):
         with self.client.session_transaction() as sess:
             sess['current_user'] = get_or_create_user(self.data_user_guilherme)
 
-        response = self.client.get("/")
+        response = self._get_with_client("/")
         self.assertRedirects(response, "/assinou/")
 
     def create_user_guto_test(self):
         users = User.objects.all()
         self.assertEqual(len(users), 0)
-        response = self.client.post("/", data=self.data_user_guto)
+        response = self._post_with_client(url="/", data=self.data_user_guto)
         users = User.objects.all()
         self.assertEqual(len(users), 1)
         user_guto = users[0]
@@ -77,26 +78,17 @@ class ControllersTest(BaseTest):
     def create_user_guilherme_test(self):
         users = User.objects.all()
         self.assertEqual(len(users), 0)
-        response = self.client.post("/", data=self.data_user_guilherme)
+        response = self._post_with_client(url="/", data=self.data_user_guilherme)
         users = User.objects.all()
         self.assertEqual(len(users), 1)
         user_guilherme = users[0]
         self._assert_user(user=user_guilherme, user_data=self.data_user_guilherme)
 
-    def __send_create_data(self, client, data_post, data_erro, url="/"):
-        response = client.post(url, data=data_post)
-        self._assert_message(session=flask.session, data=data_erro, response=response)
-
-        main_page = client.get("/")
-        self._assert_message_in_page(data_erro, main_page)
-
-        self.assertNotIn("msg", flask.session)
-
     def create_user_with_wrong_email_test(self):
         self.data_user_guilherme["email"] = "guibruzzi"
         data_erro = {'msg': u'Preencha um email válido.'}
         with self.app.test_client() as client: # necessario para manter a session ao retornar
-            self.__send_create_data(client, data_post=self.data_user_guilherme, data_erro=data_erro)
+            self._send_create_data(client, data_post=self.data_user_guilherme, data_erro=data_erro)
 
 
     def create_user_with_no_email_or_name_test(self):
@@ -104,22 +96,24 @@ class ControllersTest(BaseTest):
         data_erro = {'msg': u'Os campos "nome" e "email" são obrigatórios.'}
 
         with self.app.test_client() as client: # necessario para manter a session ao retornar
-            self.__send_create_data(client, data_post=self.data_user_guilherme, data_erro=data_erro)
+            self._send_create_data(client, data_post=self.data_user_guilherme, data_erro=data_erro)
 
             del self.data_user_guilherme["name"]
-            self.__send_create_data(client, data_post=self.data_user_guilherme, data_erro=data_erro)
+            self._send_create_data(client, data_post=self.data_user_guilherme, data_erro=data_erro)
 
             self.data_user_guilherme["email"] = "guibruzzi@gmail.com"
-            self.__send_create_data(client, data_post=self.data_user_guilherme, data_erro=data_erro)
+            self._send_create_data(client, data_post=self.data_user_guilherme, data_erro=data_erro)
 
     def create_user_with_wrong_captcha_test(self):
         self.data_user_guilherme["recaptcha_response_field"] = "wrong"
         data_erro = {'msg': u'Preencha corretamente o campo "texto da imagem".'}
 
+        # Forcando a ter captcha
         self.app.config["TESTING"] = False
+        redis_store.set('127.0.0.1', 3)
 
         with self.app.test_client() as client: # necessario para manter a session ao retornar
-            self.__send_create_data(client, data_post=self.data_user_guilherme, data_erro=data_erro)
+            self._send_create_data(client, data_post=self.data_user_guilherme, data_erro=data_erro)
 
         self.app.config["TESTING"] = True
 

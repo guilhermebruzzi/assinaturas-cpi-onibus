@@ -58,7 +58,7 @@ db = MongoEngine(app)
 
 cache = Cache(app)
 
-#redis_store = Redis(app)
+redis_store = Redis(app)
 
 BAIRROS = [
     u"Bairro Imperial de São Cristóvão", u"Benfica", u"Caju", u"Catumbi", u"Centro", u"Cidade Nova", u"Estácio", u"Gamboa", u"Glória", "Lapa", "Mangueira", u"Paquetá", "Rio Comprido", "Santa Teresa", "Santo Cristo", u"Saúde", "Vasco da Gama",
