@@ -8,6 +8,7 @@ from flaskext.oauth import OAuth
 from flaskext.mongoengine import MongoEngine
 from flask_redis import Redis
 from flask.ext.cache import Cache
+from saferproxyfix import SaferProxyFix
 
 def add_path():
     global project_root
@@ -59,6 +60,8 @@ db = MongoEngine(app)
 cache = Cache(app)
 
 redis_store = Redis(app)
+
+app.wsgi_app = SaferProxyFix(app.wsgi_app)
 
 BAIRROS = [
     u"Bairro Imperial de São Cristóvão", u"Benfica", u"Caju", u"Catumbi", u"Centro", u"Cidade Nova", u"Estácio", u"Gamboa", u"Glória", "Lapa", "Mangueira", u"Paquetá", "Rio Comprido", "Santa Teresa", "Santo Cristo", u"Saúde", "Vasco da Gama",
